@@ -1,7 +1,7 @@
 use std::fmt::{self, Formatter, Display};
 
-/* Demonstrates printing of a user defined struct using println! macro.*/
-
+// Demonstrates printing of a user defined struct using println! macro.
+/// Struct for city
 struct City {
     name: &'static str,
     // Latitude
@@ -9,7 +9,7 @@ struct City {
     // Longitude
     lon: f32,
 }
-
+/// Implement display for City 
 impl Display for City {
     // `f` is a buffer, this method must write the formatted string into it
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
@@ -22,15 +22,26 @@ impl Display for City {
     }
 }
 
-#[derive(Debug)]
+///Struct for color
 struct Color {
     red: u8,
     green: u8,
     blue: u8,
 }
 
+///Implement display for color 
+impl Display for Color {
+    // `a` is a buffer, this method must write the formatted string into it
+    fn fmt(&self, a: &mut Formatter) -> fmt::Result {
+        // `write!` is like `format!`, but it will write the formatted string into a buffer (the first argument)
+        write!(a, "red: {},green: {},blue: {}",
+               self.red, self.green, self.blue)
+    }
+}
+
+///Main func
 fn main() {
-    for city in [
+    for city in [   
         City { name: "Glassboro", lat: 39.702892, lon: -75.111839 },
         City { name: "Mullica Hill", lat: 39.73928, lon: -75.224072 },
         City { name: "Swedesboro", lat: 39.747616, lon: -75.310463 },
@@ -44,6 +55,7 @@ fn main() {
         Color { red: 0, green: 0, blue: 0 },
     ].iter() {
         // Hint : Fix the code so you can print it using {}
-        println!("{:?}", *color);
+        println!("{}", *color);
     }
 }
+
